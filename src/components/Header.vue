@@ -38,7 +38,7 @@ const handleSubmit = () => {
                     <RouterLink
                     :to="{name: 'inicio'}"
                     class="text-white uppercase font-bold"
-                    active-class="text-orange-600"
+                    active-class="text-orange-500"
                     >
                         Inicio
                     </RouterLink>
@@ -46,7 +46,7 @@ const handleSubmit = () => {
                     <RouterLink
                     :to="{name: 'favoritos'}"
                     class="text-white uppercase font-bold"
-                    active-class="text-orange-600"
+                    active-class="text-orange-500" 
                     >
                         Favoritos
                     </RouterLink>
@@ -68,7 +68,6 @@ const handleSubmit = () => {
                 class="p-3 w-full rounded-lg focus:outline-none"
                 placeholder="Nombre o Ingrediente: ej. Vodka, Tequila, ..."
                 v-model = 'store.busqueda.nombre'
-                
                 >
 
         </div>
