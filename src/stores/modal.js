@@ -13,5 +13,4 @@ export const useModalStore = defineStore('modal', () => {
         handleClickModal
     }
 
-
 })
