@@ -86,7 +86,7 @@ const formatearIngredientes = () => {
                     @click="favoritos.handleClickFavorito()"
                     >
                     
-                 Agregar a Favoritos
+                  {{ modal.textoBoton }}
                  </button>
                  
 
