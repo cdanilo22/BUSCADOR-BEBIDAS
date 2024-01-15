@@ -1,10 +1,12 @@
-import {ref, watch, onMounted} from 'vue'
+import {ref, watch, onMounted, computed} from 'vue'
 import {useBebidasStore} from './bebidas'
 import {defineStore} from 'pinia'
+import { useModalStore } from './modal'
 
 export const useFavoritosStore = defineStore('favoritos', () => {
 
     const bebidas = useBebidasStore()
+    const modal = useModalStore()
     const favoritos = ref([])
 
     onMounted(()=> {
@@ -22,24 +24,36 @@ export const useFavoritosStore = defineStore('favoritos', () => {
     }
 
 
-    const existeFavorito = (id) => {
+    const existeFavorito = () => {
         const favoritosLocalStorage = JSON.parse(localStorage.getItem('favoritos')) ?? []
-        return favoritosLocalStorage.some(favorito => favorito.idDrink === id)
+        return favoritosLocalStorage.some(favorito => favorito.idDrink === bebidas.receta.idDrink)
     }
+
+    const eliminarFavoritos = () => {
+        favoritos.value = favoritos.value.filter(favorito => favorito.idDrink !== bebidas.receta.idDrink)
+    }
+
+    const agregarFavorito = () =>  {
+        favoritos.value.push(bebidas.receta)
+    }
+
 
     const handleClickFavorito = () => {
         if(existeFavorito(bebidas.receta.idDrink)){
-            console.log('ya existe');
+            eliminarFavoritos()
         } else{
-            favoritos.value.push(bebidas.receta)
+            agregarFavorito()
         }
-
-      
+        modal.modal = false
     }
+
+    const noFavoritos = computed(()=> favoritos.value.length === 0)
 
     return {
         favoritos,
         handleClickFavorito,
-        existeFavorito
+        existeFavorito,
+        noFavoritos
     } 
+
 })
