@@ -2,11 +2,12 @@ import {ref, watch, onMounted, computed} from 'vue'
 import {useBebidasStore} from './bebidas'
 import {defineStore} from 'pinia'
 import { useModalStore } from './modal'
-
+import {useNotificacionStores} from './notificaciones'
 export const useFavoritosStore = defineStore('favoritos', () => {
 
     const bebidas = useBebidasStore()
     const modal = useModalStore()
+    const notificaciones = useNotificacionStores()
     const favoritos = ref([])
 
     onMounted(()=> {
@@ -35,6 +36,7 @@ export const useFavoritosStore = defineStore('favoritos', () => {
 
     const agregarFavorito = () =>  {
         favoritos.value.push(bebidas.receta)
+        notificaciones.mostrar = true
     }
 
 
